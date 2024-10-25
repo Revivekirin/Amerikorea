@@ -1,0 +1,28 @@
+./gradlew bootJar
+
+docker build -t jihye3535/amerikorea:latest .
+
+# 1. 로그인
+docker login
+
+# 2. 이미지 태그 지정
+docker tag jihye3535/amerikorea:latest jihye3535/amerikorea:latest
+
+# 3. Docker Hub에 이미지 푸시
+docker push jihye3535/amerikorea:latest
+
+docker run --name mysql-container --network my-network -e
+ MYSQL_ROOT_PASSWORD=kimjihye4352 -e MYSQL_DATABASE=hanaro -e MYSQL_USER=sophia -e MYSQL_PASSWORD=kimjihye43532 -p 3307:3306 -d jihye3535/mysql:8
+ 
+docker run --name mysql-container --network my-network -e MYSQL_ROOT_PASSWORD=kimjihye4352 -e MYSQL_DATABASE=hanaro -e MYSQL_USER=sophia -e MYSQL_PASSWORD=kimjihye43532 -p 3307:3306 -d mysql:8
+
+docker run --name amerikorea --network my-network -p 8080:8080 jihye3535/amerikorea
+
+docker exec -it mysql-container mysql -u root -p
+
+SHOW DATABASES;
+CREATE hanaro
+
+ALTER USER 'sophia'@'%' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON *.* TO 'sophia'@'%';
+FLUSH PRIVILEGES;

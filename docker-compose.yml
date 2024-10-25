@@ -1,0 +1,28 @@
+services:
+  springboot-app:
+    image: jihye3535/amerikorea
+    container_name: amerikorea
+    ports:
+      - "8080:8080"
+    networks:
+      - my-network
+    depends_on:
+      - mysql
+
+
+  mysql:
+    image: jihye3535/mysql:8
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: hanaro
+      MYSQL_USER: sophia
+      MYSQL_PASSWORD: 12345
+    ports:
+      - "3307:3306"
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
